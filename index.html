@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motor animado: potência, FP e capacitores</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Motor animado: potência, FP e capacitores</h1>
+<p class="sub">Digite os dados do motor. Abaixo, ele aparece girando, com a tensão e a corrente em senoides.</p>
+
+<section>
+<h2>Dados do motor</h2>
+<div class="grid">
+<label>Potência útil
+<div class="row"><input id="pu" inputmode="decimal" value="7,5"><select id="un"><option value="1">W</option><option value="1000">kW</option><option value="735.5" selected>cv</option><option value="745.7">hp</option></select></div></label>
+<label>Rendimento η (%)<input id="eta" inputmode="decimal" value="88"></label>
+<label>Tensão V (V)<input id="v" inputmode="decimal" value="380"></label>
+<label>Frequência f (Hz)<input id="f" inputmode="decimal" value="60"></label>
+<label>FP atual<input id="fp1" inputmode="decimal" value="0,82"></label>
+<label>FP desejado<input id="fp2" inputmode="decimal" value="0,95"></label>
+<label>Número de polos<select id="pol"><option>2</option><option selected>4</option><option>6</option><option>8</option></select></label>
+<label class="wide" style="grid-column:span 2">Ligação
+<select id="lig"><option value="mono">Monofásico</option><option value="tri_d" selected>Trifásico, capacitores em triângulo</option><option value="tri_y">Trifásico, capacitores em estrela</option></select></label>
+</div>
+<div id="err" class="err" role="alert"></div>
+</section>
+
+<section id="show">
+<h2>Motor funcionando</h2>
+<div class="seg" role="group" aria-label="Correção do fator de potência">
+<button type="button" id="b0" aria-pressed="true">Sem capacitor</button>
+<button type="button" id="b1" aria-pressed="false">Com capacitor</button>
+</div>
+<canvas id="cm" aria-label="Desenho animado do motor e do banco de capacitores" role="img"></canvas>
+<canvas id="cw" aria-label="Senoides de tensão, corrente e potência instantânea" role="img"></canvas>
+<div class="legend">
+<span><i style="background:var(--acc)"></i>Tensão</span>
+<span><i style="background:var(--cur)"></i>Corrente</span>
+<span><i style="background:var(--acc);opacity:.4;height:8px"></i>Potência que vai para a carga</span>
+<span><i style="background:var(--bad);opacity:.5;height:8px"></i>Energia que volta à fonte</span>
+</div>
+<label style="margin-top:12px">Velocidade da animação<input id="sp" type="range" min="0.05" max="1" step="0.05" value="0.3"></label>
+<div class="final" id="final"></div>
+<p class="note" id="note"></p>
+</section>
+
+<section>
+<details>
+<summary>Passo a passo do cálculo</summary>
+<div id="steps"></div>
+</details>
+<button id="theme" type="button">Alternar tema</button>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
