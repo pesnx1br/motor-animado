@@ -6,7 +6,12 @@ function sci(x){var a=Math.abs(x);if(a>=1)return fmt(x,3)+' F';if(a>=1e-3)return
 function step(n,t,f,r){return '<div class="step"><div class="t">'+n+'. '+t+'</div><div class="f">'+f+'</div><div class="r">'+r+'</div></div>'}
 var M=null,on=false,mix=0;
 
+function vis(v){['show','tri'].forEach(function(i){$(i).style.display=v?'':'none'})}
 function calc(){
+ if(['pu','eta','v','f','fp1','fp2'].some(function(i){return $(i).value.trim()===''})){
+  $('err').style.color='var(--mut)';$('err').textContent='Preencha todos os campos para ver o cálculo e a animação.';
+  vis(false);M=null;$('steps').innerHTML='';$('final').innerHTML='';$('note').textContent='';return}
+ $('err').style.color='';
  var pu=num('pu')*Number($('un').value),eta=num('eta')/100,V=num('v'),fr=num('f'),fp1=num('fp1'),fp2=num('fp2'),lig=$('lig').value,pol=Number($('pol').value),e='';
  if(!(pu>0))e='Informe uma potência útil maior que zero.';
  else if(!(eta>0&&eta<=1))e='O rendimento deve estar entre 0 e 100%.';
@@ -16,7 +21,8 @@ function calc(){
  else if(!(fp2>0&&fp2<=1))e='O FP desejado deve estar entre 0 e 1.';
  else if(fp2<=fp1)e='O FP desejado precisa ser maior que o FP atual.';
  $('err').textContent=e;
- if(e){M=null;$('steps').innerHTML='';$('final').innerHTML='';$('note').textContent='';return}
+ if(e){vis(false);M=null;$('steps').innerHTML='';$('final').innerHTML='';$('note').textContent='';return}
+ vis(true);
  var P=pu/eta,S1=P/fp1,Q1=Math.sqrt(Math.max(S1*S1-P*P,0)),S2=P/fp2,Q2=Math.sqrt(Math.max(S2*S2-P*P,0));
  var phi1=Math.acos(fp1),phi2=Math.acos(fp2),Qc=Q1-Q2,k=lig==='mono'?1:3,Vc=lig==='tri_y'?V/Math.sqrt(3):V;
  var Qcap=Qc/k,Xc=Vc*Vc/Qcap,C=1/(2*Math.PI*fr*Xc);

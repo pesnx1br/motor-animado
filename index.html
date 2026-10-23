@@ -16,12 +16,12 @@
 <h2>Dados do motor</h2>
 <div class="grid">
 <label>Potência útil
-<div class="row"><input id="pu" inputmode="decimal" value="7,5"><select id="un"><option value="1">W</option><option value="1000">kW</option><option value="735.5" selected>cv</option><option value="745.7">hp</option></select></div></label>
-<label>Rendimento η (%)<input id="eta" inputmode="decimal" value="88"></label>
-<label>Tensão V (V)<input id="v" inputmode="decimal" value="380"></label>
-<label>Frequência f (Hz)<input id="f" inputmode="decimal" value="60"></label>
-<label>FP atual<input id="fp1" inputmode="decimal" value="0,82"></label>
-<label>FP desejado<input id="fp2" inputmode="decimal" value="0,95"></label>
+<div class="row"><input id="pu" inputmode="decimal" placeholder="ex.: 7,5"><select id="un"><option value="1">W</option><option value="1000">kW</option><option value="735.5" selected>cv</option><option value="745.7">hp</option></select></div></label>
+<label>Rendimento η (%)<input id="eta" inputmode="decimal" placeholder="ex.: 88"></label>
+<label>Tensão V (V)<input id="v" inputmode="decimal" placeholder="ex.: 380"></label>
+<label>Frequência f (Hz)<input id="f" inputmode="decimal" placeholder="ex.: 60"></label>
+<label>FP atual<input id="fp1" inputmode="decimal" placeholder="ex.: 0,82"></label>
+<label>FP desejado<input id="fp2" inputmode="decimal" placeholder="ex.: 0,95"></label>
 <label>Número de polos<select id="pol"><option>2</option><option selected>4</option><option>6</option><option>8</option></select></label>
 <label>Capacitores por fase<select id="ncap"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
 <label class="wide" style="grid-column:1/-1">Ligação
@@ -49,7 +49,7 @@
 <p class="note" id="note"></p>
 </section>
 
-<section>
+<section id="tri">
 <h2>Triângulo de potências (ângulo φ)</h2>
 <canvas id="ct" aria-label="Triângulo de potências antes e depois da correção" role="img"></canvas>
 <p class="note">O ângulo φ diminui quando o capacitor reduz a potência reativa. A parte em destaque é a potência reativa Qc fornecida pelo banco.</p>
